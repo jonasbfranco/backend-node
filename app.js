@@ -1,6 +1,8 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
 //const routes = require ('./routes');
 
 dotenv.config();
@@ -21,12 +23,19 @@ app.get('/', async (req, res) => {
     })
 })
 
+app.post('/cadastrar', async (req, res) => {
+    const password = await bcrypt.hash("123456", 8)
+
+    console.log(password)
+
+    return.json({
+        erro: false,
+        mensagem: "Cadastrar usuário"
+    })
+})
+
 //app.get('/', routes.index);
 
 //app.get('/usuarios', routes.user.index);
 
 var port = 3000
-
-app.listen({port}, function(){
-    console.log(`Backend no ar na porta ${port}`);
-});
